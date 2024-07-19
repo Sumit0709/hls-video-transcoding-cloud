@@ -6,6 +6,7 @@ const { PutObjectCommand, S3Client } = require("@aws-sdk/client-s3");
 const { getSignedUrl } = require("@aws-sdk/s3-request-presigner");
 const mime = require('mime-types')
 const async = require('async');
+const write_into_sqs = require("./write_into_sqs");
 
 const s3Client = new S3Client({
     region: process.env.AWS_REGION,
@@ -55,6 +56,7 @@ const init = async () => {
         await Promise.all(transcodedVideoFolderContents.map(uploadFile));
 
         console.log("UPLOAD FINISHED")
+        write_into_sqs();
     }
     catch (err) {
         console.log("ERROR :: ")

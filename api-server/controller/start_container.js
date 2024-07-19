@@ -8,7 +8,7 @@ const ecsClient = new ECSClient({
     }
 })
 
-const start_container = async (data) => {
+const start_container = async (data, receiptHandle) => {
     try{
         
         const region = data.region
@@ -47,7 +47,13 @@ const start_container = async (data) => {
                             { name: "AWS_BUCKET_DOWNLOAD" , value: process.env.AWS_BUCKET_DOWNLOAD},
                             { name: "AWS_ACCESS_KEY_UPLOAD" , value: process.env.AWS_ACCESS_KEY_UPLOAD},
                             { name: "AWS_SECRET_ACCESS_KEY_UPLOAD" , value: process.env.AWS_SECRET_ACCESS_KEY_UPLOAD},
-                            { name: "AWS_BUCKET_UPLOAD" , value: process.env.AWS_BUCKET_UPLOAD}
+                            { name: "AWS_BUCKET_UPLOAD" , value: process.env.AWS_BUCKET_UPLOAD},
+                            
+                            { name: "AWS_SQS_REGION", value: "ap-south-1"},
+                            { name: "AWS_SQS_ACCESS_KEY", value: process.env.AWS_SQS_ACCESS_KEY},
+                            { name: "AWS_SQS_SECRET_ACCESS_KEY", value: process.env.AWS_SQS_SECRET_ACCESS_KEY},
+                            { name: "AWS_SQS_MESSAGE_RECEIPTHANDLE", value: receiptHandle},
+                            { name: "AWS_SQS_URL", value: process.env.AWS_SQS_URL}
                         ]
                     }
                 ]
@@ -55,7 +61,7 @@ const start_container = async (data) => {
         })
 
         console.log("CREATING CONTAINER...")
-        const response = await ecsClient.send(command);
+        // const response = await ecsClient.send(command);
         console.log("...COMPLETED CREATING CONTAINER")
         return {
             success: true,

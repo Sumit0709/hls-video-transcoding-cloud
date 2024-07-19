@@ -34,13 +34,18 @@ const read_message_from_sqs = async () => {
     const input = { // ReceiveMessageRequest
         QueueUrl: process.env.AWS_SQS_URL,// required
         MaxNumberOfMessages: 1,
-        VisibilityTimeout: 20, // Same as defined while creating SQS, can be varied as well
+        // VisibilityTimeout: 20, // Same as defined while creating SQS, can be varied as well
         WaitTimeSeconds:10, //long polling wait time, to reduce eliminating the number of empty responses and false empty responses
         // ReceiveRequestAttemptId: "unique id for every request, useful when retrying due to network failure",
     };
 
     const command = new ReceiveMessageCommand(input);
     const response = await client.send(command);
+    
+    if(!response?.Messages){
+        console.log("Queue is empty!");
+        return;
+    }
 
     let data = response?.Messages[0]?.Body;
     data = JSON.parse(data);
@@ -53,11 +58,11 @@ const read_message_from_sqs = async () => {
         size: data.s3.object.size
     }
 
-    const deletion_id =  response?.Messages[0]?.ReceiptHandle;
+    const receiptHandle =  response?.Messages[0]?.ReceiptHandle;
     
     if(isValidData(filtered_data)){
         // start-container
-        start_container(filtered_data);
+        start_container(filtered_data, receiptHandle);
     }else{
         console.log("filtered_data is invalid");
     }
