@@ -1,5 +1,5 @@
 var cron = require('node-cron');
-const read_data_from_sqs = require('../read_data_from_sqs');
+const read_message_from_sqs = require('../read_message_from_sqs');
 
 const read_sqs_cronjob = async () => {
     console.log("CRON");
@@ -9,12 +9,12 @@ const read_sqs_cronjob = async () => {
 
     if(sec < 20){
         console.log('Reading data instantly from SQS at ', Date());
-        read_data_from_sqs()
+        read_message_from_sqs()
     }
 
     const start_read_sqs_cronjob = cron.schedule('*/1 * * * *', () => {
         console.log('Reading data from SQS at ', Date());
-        read_data_from_sqs()
+        read_message_from_sqs()
     },
     {
         scheduled: true,
