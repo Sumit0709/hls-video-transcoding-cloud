@@ -3,9 +3,13 @@ const express = require('express')
 
 const {ECSClient, RunTaskCommand} = require('@aws-sdk/client-ecs')
 
+const read_sqs_cronjob = require('./controller/cronjobs/read_sqs');
+
 const app = express();
 const PORT = process.env.PORT || 9000
 app.use(express.json());
+
+read_sqs_cronjob();
 
 const ecsClient = new ECSClient({
     region: process.env.AWS_REGION,
