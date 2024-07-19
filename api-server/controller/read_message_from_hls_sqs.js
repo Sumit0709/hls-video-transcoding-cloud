@@ -32,9 +32,10 @@ const read_message_from_hls_sqs = async () => {
     }
 
     let data = response?.Messages[0]?.Body;
-    data = JSON.parse(data);
+    // data = JSON.parse(data);
+    console.log("READ MESSAGE FROM HLS SQS :: ", data)
 
-    const receiptHandle = data.receiptHandle;
+    const receiptHandle = data
     const hls_receiptHandle =  response?.Messages[0]?.ReceiptHandle;
 
     const delete_sqs_message_1 = await delete_message_from_sqs(process.env.AWS_SQS_URL, receiptHandle);

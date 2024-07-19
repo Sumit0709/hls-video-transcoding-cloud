@@ -49,7 +49,7 @@ const start_container = async (data, receiptHandle) => {
                             { name: "AWS_SECRET_ACCESS_KEY_UPLOAD" , value: process.env.AWS_SECRET_ACCESS_KEY_UPLOAD},
                             { name: "AWS_BUCKET_UPLOAD" , value: process.env.AWS_BUCKET_UPLOAD},
                             
-                            { name: "AWS_SQS_REGION", value: "ap-south-1"},
+                            { name: "AWS_HLS_SQS_REGION", value: process.env.AWS_HLS_SQS_REGION},
                             { name: "AWS_SQS_ACCESS_KEY", value: process.env.AWS_SQS_ACCESS_KEY},
                             { name: "AWS_SQS_SECRET_ACCESS_KEY", value: process.env.AWS_SQS_SECRET_ACCESS_KEY},
                             { name: "AWS_SQS_MESSAGE_RECEIPTHANDLE", value: receiptHandle},
@@ -61,7 +61,7 @@ const start_container = async (data, receiptHandle) => {
         })
 
         console.log("CREATING CONTAINER...")
-        // const response = await ecsClient.send(command);
+        const response = await ecsClient.send(command);
         console.log("...COMPLETED CREATING CONTAINER")
         return {
             success: true,

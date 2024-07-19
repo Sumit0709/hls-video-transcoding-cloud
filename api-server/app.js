@@ -3,12 +3,14 @@ const express = require('express')
 
 const read_sqs_cronjob = require('./controller/cronjobs/read_sqs_cronjob');
 const start_container = require('./controller/start_container');
+const read_hls_sqs_cronjob = require('./controller/cronjobs/read_hls_sqs_cronjob');
 
 const app = express();
 const PORT = process.env.PORT || 9000
 app.use(express.json());
 
 read_sqs_cronjob();
+read_hls_sqs_cronjob();
 
 const config = {
     }

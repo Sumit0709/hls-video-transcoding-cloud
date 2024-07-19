@@ -8,12 +8,12 @@ const read_hls_sqs_cronjob = async () => {
     console.log("SECOND == ", sec);
 
     if(sec < 20){
-        console.log('Reading data instantly from SQS at ', Date());
+        console.log('Reading data instantly from HLS SQS at ', Date());
         read_message_from_hls_sqs()
     }
 
     const start_read_sqs_cronjob = cron.schedule('*/1 * * * *', () => {
-        console.log('Reading data from SQS at ', Date());
+        console.log('Reading data from HLS SQS at ', Date());
         read_message_from_hls_sqs()
     },
     {

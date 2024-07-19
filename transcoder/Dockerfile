@@ -7,15 +7,20 @@ RUN apt-get upgrade -y
 RUN apt-get install -y nodejs
 
 RUN apt-get install -y ffmpeg
-
+RUN apt-get update && apt-get install -y dos2unix
 
 WORKDIR /home/app
 
 COPY transcode.sh /home/app
 COPY start.sh /home/app
 
+# This ensures .sh has the correct line endings before the container starts.(to resolve error when copying file from windows to linux)
+RUN dos2unix /home/app/start.sh
+RUN dos2unix /home/app/transcode.sh
+
 COPY download.js /home/app/
 COPY upload.js /home/app/
+COPY write_into_sqs.js /home/app/
 COPY package*.json /home/app/
 
 # COPY .env /home/app/
