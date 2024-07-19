@@ -2,7 +2,7 @@ const { SQSClient, SendMessageCommand } = require("@aws-sdk/client-sqs");
 const start_container = require("./start_container");
 
 const config = {
-    region: process.env.AWS_SQS_REGION,
+    region: process.env.AWS_HLS_SQS_URL,
     credentials: {
         accessKeyId: process.env.AWS_SQS_ACCESS_KEY,
         secretAccessKey: process.env.AWS_SQS_SECRET_ACCESS_KEY

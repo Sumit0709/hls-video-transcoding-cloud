@@ -53,7 +53,7 @@ const start_container = async (data, receiptHandle) => {
                             { name: "AWS_SQS_ACCESS_KEY", value: process.env.AWS_SQS_ACCESS_KEY},
                             { name: "AWS_SQS_SECRET_ACCESS_KEY", value: process.env.AWS_SQS_SECRET_ACCESS_KEY},
                             { name: "AWS_SQS_MESSAGE_RECEIPTHANDLE", value: receiptHandle},
-                            { name: "AWS_SQS_URL", value: process.env.AWS_SQS_URL}
+                            { name: "AWS_HLS_SQS_URL", value: process.env.AWS_HLS_SQS_URL}
                         ]
                     }
                 ]
