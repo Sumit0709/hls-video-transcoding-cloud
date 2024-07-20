@@ -58,7 +58,7 @@ master_playlist+="\n#EXT-X-STREAM-INF:BANDWIDTH=AUTO,RESOLUTION=$resolution\n"
 master_playlist+="${resolution}/index.m3u8\n"
 
 # Upload the transcoded video to S3
-# aws s3 cp --recursive "$output_file" s3://hls.src-video-streaming/"${aws_file_location}"
+# aws s3 cp --recursive "$output_file" s3://<aws bucket name>/"${aws_file_location}"
 
 # Clean up temporary file
 # rm -r -f "$output_file"
@@ -77,7 +77,7 @@ transcode_video 1080p "$input_file"
 echo -e "$master_playlist" > "${master_file_path}/master.m3u8"  # Write to a file inside the final output directory
 
 
-# aws s3 cp "${master_file_path}/master.m3u8" s3://hls.src-video-streaming/uploads/video_"${uuid}"/master.m3u8
+# aws s3 cp "${master_file_path}/master.m3u8" s3://<aws bucket name>/uploads/video_"${uuid}"/master.m3u8
 
 
 echo "Transcoding complete!"
