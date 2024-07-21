@@ -7,11 +7,13 @@ This project allows you to easily transcode video files uploaded into the S3 buc
 
 # Demo: Video transcoding
 
-The included video demonstrates how our application streams videos efficiently. You'll see how it loads only the relevant segments based on the user's playback position. Additionally, switching video quality triggers segment reloading and adapts the file size accordingly.
+The included video demonstrates how our application transcodes videos efficiently in the AWS cloud.
 
 
 
-<URL>
+
+https://github.com/user-attachments/assets/494e29e5-f89b-4d8b-8d32-b5fb1e9484d0
+
 
 
 
